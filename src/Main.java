@@ -1,7 +1,4 @@
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -9,9 +6,13 @@ public class Main {
 
         try (Connection conn = DriverManager.getConnection(url)) {
             Statement stmt = conn.createStatement();
-            String sql= "Update alumnos set edad = 21 where id = 1";
-            int resultado = stmt.executeUpdate(sql);
-            System.out.println(resultado);
+            String sql= "select * from alumnos";
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                String nombre = rs.getString("nombre");
+                int edad = rs.getInt("edad");
+                System.out.println(nombre + " " + edad);
+            }
             System.out.println("Ejecución correcta xd");
         } catch (SQLException e) {
             System.out.println("Error: " + e.getMessage());
