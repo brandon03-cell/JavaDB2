@@ -9,11 +9,9 @@ public class Main {
 
         try (Connection conn = DriverManager.getConnection(url)) {
             Statement stmt = conn.createStatement();
-            String sql= "create table alumnos (" +
-                    "id integer primary key autoincrement," +
-                    "nombre text," +
-                    "edad integer)";
-            stmt.execute(sql);
+            String sql= "Update alumnos set edad = 21 where id = 1";
+            int resultado = stmt.executeUpdate(sql);
+            System.out.println(resultado);
             System.out.println("Ejecución correcta xd");
         } catch (SQLException e) {
             System.out.println("Error: " + e.getMessage());
